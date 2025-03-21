@@ -39,7 +39,7 @@ function App() {
   
       console.log("Delete response:", res.data);
       
-      fetchStudents(); // Refresh list
+      fetchStudents(); 
     } catch (error) {
       console.error("Error deleting students:", error.response?.data || error.message);
     }

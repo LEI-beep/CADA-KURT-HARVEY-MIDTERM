@@ -43,21 +43,21 @@ app.post("/add-student", async (req, res) => {
 
 
 app.delete("/delete-student/:id", async (req, res) => {
-    const id = Number(req.params.id); // Convert ID to a number
+    const id = Number(req.params.id); 
   
     if (isNaN(id)) {
       return res.status(400).json({ error: "Invalid student ID" });
     }
   
     try {
-      // Check if the student exists before attempting to delete
+
       const checkStudent = await db.query("SELECT * FROM students WHERE student_id = $1", [id]);
   
       if (checkStudent.rowCount === 0) {
         return res.status(404).json({ error: "Student not found" });
       }
   
-      // Proceed with deletion
+
       const result = await db.query("DELETE FROM students WHERE student_id = $1 RETURNING *", [id]);
 
       res.json({ message: "Student deleted", deletedStudent: result.rows[0] });
